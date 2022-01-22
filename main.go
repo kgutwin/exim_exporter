@@ -9,6 +9,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"syscall"
 
@@ -302,8 +303,11 @@ func (e *Exporter) TailRejectLog(lines chan *tail.Line) {
 			readErrors.Inc()
 			continue
 		}
-		level.Debug(e.logger).Log("file", "rejectlog", "msg", line.Text)
-		eximReject.Inc()
+		match, _ := regexp.MatchString(`^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}`, line.Text)
+		if match {
+			level.Debug(e.logger).Log("file", "rejectlog", "msg", line.Text)
+			eximReject.Inc()
+		}
 	}
 }
 
@@ -314,8 +318,11 @@ func (e *Exporter) TailPanicLog(lines chan *tail.Line) {
 			readErrors.Inc()
 			continue
 		}
-		level.Debug(e.logger).Log("file", "paniclog", "msg", line.Text)
-		eximPanic.Inc()
+		match, _ := regexp.MatchString(`^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}`, line.Text)
+		if match {
+			level.Debug(e.logger).Log("file", "paniclog", "msg", line.Text)
+			eximPanic.Inc()
+		}
 	}
 }
 
