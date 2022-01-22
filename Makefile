@@ -1,11 +1,12 @@
-.PHONY: all fmt vet test build build-deb clean
+.PHONY: all fmt vet test build clean
 
-all: fmt vet test build build-deb
+all: fmt vet test build
 
 GOOS ?= linux
-ARCH ?= amd64
-TAGS ?= systemd
-VERSION = $(shell dpkg-parsechangelog --show-field Version)
+#ARCH ?= amd64
+#TAGS ?= 
+#VERSION = $(shell dpkg-parsechangelog --show-field Version)
+VERSION = 1.3.1
 REVISION = $(shell git rev-parse --short HEAD)
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 LDFLAGS = -X github.com/prometheus/common/version.Version=$(VERSION) \
@@ -24,7 +25,7 @@ test:
 	go test -v .
 
 build:
-	GOOS=$(GOOS) GOARCH=$(ARCH) go build -v -o exim_exporter -tags $(TAGS) -ldflags "$(LDFLAGS)" .
+	GOOS=$(GOOS) go build -v -o exim_exporter -ldflags "$(LDFLAGS)" .
 
 build-deb:
 	mkdir $(BUILD_DIR)

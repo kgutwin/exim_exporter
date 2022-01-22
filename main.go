@@ -26,12 +26,12 @@ import (
 )
 
 var (
-	logPath          = kingpin.Flag("exim.log-path", "Path to Exim panic log file.").Default("/var/log/exim4").Envar("EXIM_LOG_PATH").String()
-	mainlog          = kingpin.Flag("exim.mainlog", "Path to Exim main log file.").Default("mainlog").Envar("EXIM_MAINLOG").String()
-	rejectlog        = kingpin.Flag("exim.rejectlog", "Path to Exim reject log file.").Default("rejectlog").Envar("EXIM_REJECTLOG").String()
-	paniclog         = kingpin.Flag("exim.paniclog", "Path to Exim panic log file.").Default("paniclog").Envar("EXIM_PANICLOG").String()
-	eximExec         = kingpin.Flag("exim.executable", "Name of the Exim daemon executable.").Default("exim4").Envar("EXIM_EXECUTABLE").String()
-	inputPath        = kingpin.Flag("exim.input-path", "Path to Exim queue directory.").Default("/var/spool/exim4/input").Envar("EXIM_QUEUE_DIR").String()
+	logPath          = kingpin.Flag("exim.log-path", "Path to Exim panic log file.").Default("/var/log/exim").Envar("EXIM_LOG_PATH").String()
+	mainlog          = kingpin.Flag("exim.mainlog", "Path to Exim main log file.").Default("main.log").Envar("EXIM_MAINLOG").String()
+	rejectlog        = kingpin.Flag("exim.rejectlog", "Path to Exim reject log file.").Default("reject.log").Envar("EXIM_REJECTLOG").String()
+	paniclog         = kingpin.Flag("exim.paniclog", "Path to Exim panic log file.").Default("panic.log").Envar("EXIM_PANICLOG").String()
+	eximExec         = kingpin.Flag("exim.executable", "Name of the Exim daemon executable.").Default("exim").Envar("EXIM_EXECUTABLE").String()
+	inputPath        = kingpin.Flag("exim.input-path", "Path to Exim queue directory.").Default("/var/spool/exim/input").Envar("EXIM_QUEUE_DIR").String()
 	listenAddress    = kingpin.Flag("web.listen-address", "Address to listen on for web interface and telemetry.").Default(":9636").Envar("WEB_LISTEN_ADDRESS").String()
 	metricsPath      = kingpin.Flag("web.telemetry-path", "Path under which to expose metrics.").Default("/metrics").Envar("WEB_TELEMETRY_PATH").String()
 	useJournal       = kingpin.Flag("exim.use-journal", "Use the journal instead of log file tailing").Envar("EXIM_USE_JOURNAL").Bool()
